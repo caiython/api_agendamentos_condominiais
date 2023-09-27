@@ -7,6 +7,3 @@ class Config():
 
     # Debug Mode
     DEBUG = True
-
-    # Static Folder
-    STATIC_FOLDER = 'static'
