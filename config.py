@@ -1,9 +1,9 @@
 class Config():
     # Database Config
-    #SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@localhost/database'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 
     # Flask Config
-    #SECRET_KEY = '123456'
+    SECRET_KEY = '123456'
 
     # Debug Mode
     DEBUG = True
