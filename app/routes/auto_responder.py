@@ -20,7 +20,7 @@ def auto_responder():
     request_headers = request.headers
     condominio = request_headers.get('Condominio')
     credenciais = f'{request_headers.get("Usuario")}:{request_headers.get("Senha")}'
-    token = base64.b64encode(credenciais).decode('utf-8')
+    token = base64.b64encode((credenciais).encode('utf-8')).decode('utf-8')
     
     query_result = Condominio.query.filter_by(token=token).filter_by(nome=condominio.lower()).first()
 
