@@ -24,6 +24,15 @@ def auto_responder():
     
     query_result = Condominio.query.filter_by(token=token).filter_by(nome=condominio.lower()).first()
 
+    if query_result is None:
+        response = {
+            'replies': [
+                {'message': 'Condomínio não cadastrado.'}
+            ]
+        }
+
+        return json.dumps(response), 200, headers
+
     if ('query' in data and
         'appPackageName' in data and
         'messengerPackageName' in data and
