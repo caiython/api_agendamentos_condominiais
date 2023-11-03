@@ -1,7 +1,9 @@
 from flask_admin.contrib.sqla import ModelView
 from wtforms.fields import PasswordField, StringField
+from app import basic_auth, AuthException
+from flask import redirect
 import base64
-    
+
 class CondominioView(ModelView):
 
     column_list = ['condominio_id', 'nome', 'endereco', 'status', 'usuarios']
@@ -16,6 +18,15 @@ class CondominioView(ModelView):
     def on_model_change(self, form, model, is_created):
         credenciais = f'{form.usuario_autenticacao.data}:{form.senha_autenticacao.data}'.encode('utf-8')
         model.token = base64.b64encode(credenciais).decode('utf-8')
+    
+    def is_accessible(self):
+        if not basic_auth.authenticate():
+            raise AuthException('Not authenticated.')
+        else:
+            return True
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(basic_auth.challenge())
 
 class UsuarioView(ModelView):
     column_list = ['usuario_id', 'nome_completo', 'contato', 'status', 'instancia', 'condominios']

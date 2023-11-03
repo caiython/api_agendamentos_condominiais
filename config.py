@@ -7,3 +7,7 @@ class Config():
 
     # Debug Mode
     DEBUG = True
+
+    #Basic Auth
+    BASIC_AUTH_USERNAME = 'admin'
+    BASIC_AUTH_PASSWORD = '12345'

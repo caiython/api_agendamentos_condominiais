@@ -2,11 +2,21 @@ from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
+from flask_basicauth import BasicAuth
+from werkzeug.exceptions import HTTPException
+from werkzeug import Response
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
+basic_auth = BasicAuth(app)
+
+class AuthException(HTTPException):
+    def __init__(self, message):
+        super().__init__(message, Response(
+            "You could not be authenticated. Please refresh the page.", 401,
+            {'WWW-Authenticate': 'Basic realm="Login Required"'} ))
 
 from .models import *
 from .views.admin import *

@@ -42,6 +42,8 @@ def auto_responder():
 
         sender = data['query']['sender']
         message = data['query']['message']
+        
+        print(f' - - NEW MESSAGE\n - CONDOMINIO: "{condominio}"\n - SENDER: "{sender}"\n - MESSAGE: "{message}"')
 
         response = {
             'replies': [
