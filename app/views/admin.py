@@ -29,14 +29,14 @@ class CondominioView(ModelView):
         return redirect(basic_auth.challenge())
 
 class UsuarioView(ModelView):
-    column_list = ['usuario_id', 'nome_completo', 'contato', 'status', 'instancia', 'condominios']
+    column_list = ['usuario_id', 'nome_completo', 'contato', 'status', 'condominios']
     column_labels = dict(usuario_id='ID')
-    form_columns = ['nome_completo', 'contato', 'status', 'instancia', 'condominios']
+    form_columns = ['nome_completo', 'contato', 'status', 'condominios']
 
 class CacheUsuarioView(ModelView):
-    column_list = ['cache_id', 'tipo', 'conteudo', 'usuario']
+    column_list = ['cache_id', 'tipo', 'conteudo', 'usuario', 'condominio']
     column_labels = dict(cache_id='ID')
-    form_columns = ['tipo', 'conteudo', 'usuario']
+    form_columns = ['tipo', 'conteudo', 'usuario', 'condominio']
 
 class AreaView(ModelView):
     column_list = ['area_id', 'nome', 'descricao', 'capacidade', 'localizacao', 'condominio', 'horarios']

@@ -25,7 +25,7 @@ class Usuario(db.Model):
     nome_completo = db.Column(db.String(255), nullable=False)
     contato = db.Column(db.String(13), unique=True, nullable=False)
     status = db.Column(db.Enum('ativo', 'inativo'), default='ativo', nullable=False)
-    instancia = db.Column(db.String(20), nullable=False, default='0')
+    #instancia = db.Column(db.String(20), nullable=False, default='0')
 
     def __repr__(self):
         return f'<{self.usuario_id}: {self.nome_completo}>'
@@ -36,6 +36,8 @@ class CacheUsuario(db.Model):
     conteudo = db.Column(db.String(50), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.usuario_id'))
     usuario = db.relationship('Usuario', backref=db.backref('cache', lazy='dynamic'))
+    condominio_id = db.Column(db.Integer, db.ForeignKey('condominio.condominio_id'))
+    condominio = db.relationship('Condominio', backref=db.backref('cache', lazy='dynamic'))
 
 area_horario = db.Table('AreaHorario',
     db.Column('area_horario_id', db.Integer, primary_key=True),
