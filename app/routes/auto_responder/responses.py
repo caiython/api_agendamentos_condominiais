@@ -1,3 +1,5 @@
+from app import Area
+
 class Responses:
 
     def welcome(condominio_nome):
@@ -27,10 +29,77 @@ class Responses:
 ☝️ Digite o código referente à opção desejada.'''
 
         return text
+    
+    def choose_date():
+        text = '''Digite a data desejada no seguinte formato:
+👉 *dd/mm/aa*
+
+*Exemplo*: 23/12/23
+
+❌ Caso deseje finalizar o autoatendimento, digite *F*.'''
+        
+        return text
+    
+    def no_weekday_for_selected_date(nome_da_area, dia_da_semana):
+        text = f'''❌ A área *{nome_da_area}* não possui agendamentos para os dias da semana de *{dia_da_semana}*.
+
+Por favor, insira outra data ou entre em contato com o administrador do condomínio para inclusão do dia da semana informado.'''
+        
+        return text
+    
+    def no_schedule_for_selected_date(nome_da_area, data):
+        text = f'''🙁 Não há disponibilidade de horário para a área *{nome_da_area}* na data *{data}*.
+
+Por favor, insira outra data.'''
+        
+        return text
+
+    def choose_area(condominio):
+        text = '🏖️ Selecione um espaço:\n\n'
+        
+        areas = Area.query.filter_by(condominio=condominio).all()
+        for area in areas:
+            text += f'*[{area.area_id}]* - {area.nome}\n'
+        
+        text += '''
+*[F]* - Finalizar Autoatendimento ❌
+
+☝️ Digite o código referente à opção desejada.'''
+        
+        return text
+
+    def choose_schedule(horarios_disponiveis):
+        text = '⏰ Selecione um horário disponível:\n\n'
+
+        for horario in horarios_disponiveis:
+            text += f'*[{horario[0]}]* - {horario[1].strftime("%Hh")}\n'
+        
+        text += '''
+*[F]* - Finalizar Autoatendimento ❌
+
+☝️ Digite o código referente à opção desejada.'''
+        
+        return text
+    
+    def scheduling_finish(area_name, horario, date, nome_condominio):
+        text = f'''✅ Agendamento realizado!
+Local: *{area_name}*
+Horário: *{horario}*
+Data: *{date}*
+        
+🏁 O autoatendimento foi finalizado. Envie uma nova mensagem para iniciar outro atendimento.
+
+O condomínio *{nome_condominio}* agradece o contato! 😄
+
+🤖 _Sistema Desenvolvido por *@caiocvl*._'''
+        
+        return text
 
     def thank_you(nome_condominio):
         
-        text = f'''O autoatendimento foi finalizado. O *{nome_condominio}* agradece o contato! 😄
+        text = f'''🏁 O autoatendimento foi finalizado. Envie uma nova mensagem para iniciar outro atendimento.
+
+O condomínio *{nome_condominio}* agradece o contato! 😄
 
 🤖 _Sistema Desenvolvido por *@caiocvl*._'''
         
