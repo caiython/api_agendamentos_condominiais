@@ -6,7 +6,7 @@ def set_message(sender_message, cache_instance, user, condominio):
     if cache_instance.conteudo == '0':
         cache_instance.conteudo = '0_01'
         db.session.commit()
-        return Responses.welcome_0(condominio.nome)
+        return Responses.welcome(condominio.nome)
     
     elif cache_instance.conteudo == '0_01':
         expected_message = {
@@ -16,7 +16,7 @@ def set_message(sender_message, cache_instance, user, condominio):
         if sender_message.lower() in expected_message['01']:
             cache_instance.conteudo = '0_01_01'
             db.session.commit()
-            return Responses.space_reservation_0_01()
+            return Responses.space_reservation()
         elif sender_message.lower() in expected_message['f']:
             cache_instance.conteudo = '0'
             db.session.commit()
