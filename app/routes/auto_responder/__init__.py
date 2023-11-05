@@ -2,6 +2,7 @@ import json
 from flask import Blueprint, request
 from app import Condominio
 import base64
+from .data_process import DataProcessing
 
 auto_responder_bp = Blueprint('auto_responder_bp', __name__)
 
@@ -18,16 +19,16 @@ def auto_responder():
 
     data = request.get_json()
     request_headers = request.headers
-    condominio = request_headers.get('Condominio')
+    nome_condominio = request_headers.get('Condominio')
     credenciais = f'{request_headers.get("Usuario")}:{request_headers.get("Senha")}'
     token = base64.b64encode((credenciais).encode('utf-8')).decode('utf-8')
     
-    query_result = Condominio.query.filter_by(token=token).filter_by(nome=condominio.lower()).first()
+    condominio = Condominio.query.filter_by(token=token).filter_by(nome=nome_condominio.lower()).first()
 
-    if query_result is None:
+    if condominio is None:
         response = {
             'replies': [
-                {'message': 'Condomínio não cadastrado.'}
+                {'message': 'O condomínio não está cadastrado ou houve um erro de autenticação. Por favor, relate o problema ao administrador do condomínio.'}
             ]
         }
 
@@ -41,15 +42,10 @@ def auto_responder():
     ):
 
         sender = data['query']['sender']
-        message = data['query']['message']
-        
-        print(f' - - NEW MESSAGE\n - CONDOMINIO: "{condominio}"\n - SENDER: "{sender}"\n - MESSAGE: "{message}"')
+        sender_message = data['query']['message']
 
-        response = {
-            'replies': [
-                {'message': f'{query_result.condominio_id}. {query_result.nome} - {query_result.endereco} '}
-            ]
-        }
+        response = DataProcessing.get_response(condominio, sender, sender_message)
+
         return json.dumps(response), 200, headers
     
     else:

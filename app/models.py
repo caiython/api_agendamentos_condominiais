@@ -25,7 +25,6 @@ class Usuario(db.Model):
     nome_completo = db.Column(db.String(255), nullable=False)
     contato = db.Column(db.String(13), unique=True, nullable=False)
     status = db.Column(db.Enum('ativo', 'inativo'), default='ativo', nullable=False)
-    #instancia = db.Column(db.String(20), nullable=False, default='0')
 
     def __repr__(self):
         return f'<{self.usuario_id}: {self.nome_completo}>'
