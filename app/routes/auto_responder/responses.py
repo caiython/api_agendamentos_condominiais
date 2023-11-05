@@ -6,9 +6,9 @@ class Responses:
 
 👉 Opções:
 
-*[01]* - Reservas de Espaços;
+*[01]* - 📅 Agendamentos
 
-*[F]* - Finalizar Autoatendimento.
+*[F]* - Finalizar Autoatendimento ❌
 
 ☝️ Digite o código referente à opção desejada.'''
 
@@ -19,10 +19,10 @@ class Responses:
 
         text = '''👉 Opções:
         
-*[01]* - Ver meus agendamentos;
-*[02]* - Realizar agendamento;
+*[01]* - Realizar agendamento 🗓️
+*[02]* - Ver meus agendamentos 👁️
 
-*[F]* - Finalizar Autoatendimento.
+*[F]* - Finalizar Autoatendimento ❌
 
 ☝️ Digite o código referente à opção desejada.'''
 
