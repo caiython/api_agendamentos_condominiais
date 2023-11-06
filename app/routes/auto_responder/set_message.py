@@ -37,10 +37,10 @@ def set_message(sender_message, cache_instance, user, condominio):
             db.session.commit()
             return Responses.choose_area(condominio)
         elif sender_message.lower() in expected_message['02']:
-            #cache_instance.conteudo = '0_01_01_02'
-            #db.session.commit()
-            #return Responses.my_schedules(condominio)
-            pass
+            cache_instance.conteudo = '0_01_01_02'
+            db.session.commit()
+            agendamentos = Agendamento.query.filter(Agendamento.usuario==user, Agendamento.condominio==condominio, Agendamento.status=='agendado').all()
+            return Responses.my_schedules(agendamentos)
         elif sender_message.lower() in expected_message['f']:
             cache_instance.conteudo = '0'
             db.session.commit()
@@ -143,6 +143,27 @@ def set_message(sender_message, cache_instance, user, condominio):
                     return Responses.scheduling_finish(area.nome, horario[1].strftime("%Hh"), date_cache.strftime(f"%d/%m/%y"), condominio.nome)
 
             return Responses.invalid_code()
+    
+    elif cache_instance.conteudo == '0_01_01_02':
+        expected_message = {
+            'f': ['f', 'finalizar', 'sair', 'cancelar', 'fechar']
+        }
+        if sender_message.lower() in expected_message['f']:
+            cache_instance.conteudo = '0'
+            db.session.commit()
+            return Responses.thank_you(condominio.nome)
+        else:
+            agendamento = Agendamento.query.filter(Agendamento.agendamento_id==sender_message, Agendamento.usuario==user, Agendamento.condominio==condominio, Agendamento.status=='agendado').first()
+            
+            if agendamento is None:
+                return Responses.invalid_code()
+            
+            agendamento.status = 'cancelado'
+            cache_instance.conteudo = '0'
+            db.session.commit()
+
+            return Responses.schedule_cancel(agendamento.agendamento_id, condominio.nome)
+
 
 def converte_dias_da_semana_unicos(dias_da_semana_unicos):
     output = []

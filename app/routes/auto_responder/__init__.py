@@ -23,7 +23,7 @@ def auto_responder():
     credenciais = f'{request_headers.get("Usuario")}:{request_headers.get("Senha")}'
     token = base64.b64encode((credenciais).encode('utf-8')).decode('utf-8')
     
-    condominio = Condominio.query.filter_by(token=token).filter_by(nome=nome_condominio.lower()).first()
+    condominio = Condominio.query.filter_by(token=token).filter_by(nome=nome_condominio).first()
 
     if condominio is None:
         response = {

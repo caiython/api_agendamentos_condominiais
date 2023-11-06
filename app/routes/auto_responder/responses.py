@@ -94,6 +94,29 @@ O condomínio *{nome_condominio}* agradece o contato! 😄
 🤖 _Sistema Desenvolvido por *@caiocvl*._'''
         
         return text
+    
+    def my_schedules(agendamentos):
+        text = f"📅 Meus agendamentos:\n\n"
+
+        for agendamento in agendamentos:
+            text += f'''*Agendamento {agendamento.agendamento_id}*
+Espaço: {agendamento.area.nome}
+Data: {agendamento.data_hora.date().strftime(f'%d/%m/%Y')}
+Horário: {agendamento.data_hora.time().strftime(f'%Hh')}\n\n'''
+        
+        text += '''☝️ Digite *F* para finalizar o autoatendimento ou digite o número referente ao agendamento para cancelá-lo.'''
+        return text
+
+    def schedule_cancel(agendamento_id, nome_condominio):
+        text = f'''O agendamento {agendamento_id} foi cancelado com sucesso.
+
+🏁 O autoatendimento foi finalizado. Envie uma nova mensagem para iniciar outro atendimento.
+
+O condomínio *{nome_condominio}* agradece o contato! 😄
+
+🤖 _Sistema Desenvolvido por *@caiython*._'''
+        
+        return text
 
     def thank_you(nome_condominio):
         
@@ -101,7 +124,7 @@ O condomínio *{nome_condominio}* agradece o contato! 😄
 
 O condomínio *{nome_condominio}* agradece o contato! 😄
 
-🤖 _Sistema Desenvolvido por *@caiocvl*._'''
+🤖 _Sistema Desenvolvido por *caiython*._'''
         
         return text
 
