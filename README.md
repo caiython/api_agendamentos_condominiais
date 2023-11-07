@@ -73,14 +73,14 @@ Sugestão: adicionar opções exclusivas para os administradores de condomínio 
 
 ## Autores
 
-Este é um projeto de cunho acadêmico que compõe uma parte de um trabalho de conclusão de curso de Engenharia de Computação. O grupo autor deste projeto é composto pelos integrantes:
+Este é um projeto de cunho acadêmico que compõe uma parte do trabalho de conclusão de curso denominado <b>Condomínio Inteligente</b>, no curso de Engenharia de Computação. O grupo autor deste projeto é composto pelos integrantes:
 
 |Nome|RA|GitHub|LinkedIn|
 |-|-|-|-|
 |Caio Chagas Vieira Lopes|11190088|<a href="https://github.com/caiython">Caiython</a>|<a href="https://www.linkedin.com/in/caiocvl/">Caio Chagas</a>|
-|Gustavo Henrique de Oliveira Valentim|11191010|-||
-|Lais Teles Marques|11190576|-||
-|Lucas Kaique Rocha Nascimento|11190982|-||
+|Gustavo Henrique de Oliveira Valentim|11191010|-|<a href="https://www.linkedin.com/in/gustavo-valentim-61086b212/">Gustavo Valentim</a>|
+|Lais Teles Marques|11190576|-|-|
+|Lucas Kaique Rocha Nascimento|11190982|-|-|
 
 ## Licença
 
