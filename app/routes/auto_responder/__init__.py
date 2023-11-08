@@ -3,6 +3,7 @@ from flask import Blueprint, request
 from app import Condominio
 import base64
 from .data_process import DataProcessing
+import re
 
 auto_responder_bp = Blueprint('auto_responder_bp', __name__)
 
@@ -42,6 +43,8 @@ def auto_responder():
     ):
 
         sender = data['query']['sender']
+        if sender[0] == ("+") and sender[12] == "-":
+            sender = re.sub(r'[+\s-]', '', sender)
         sender_message = data['query']['message']
 
         response = DataProcessing.get_response(condominio, sender, sender_message)
